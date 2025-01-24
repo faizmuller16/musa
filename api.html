@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Requests</title>
+    <a href="INDEX.HTML">World</a>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+       
+
+        .status.alive {
+            background-color: green;
+            color: #fff;
+            padding: 3px 7px;
+            border-radius: 2px;
+            font-size: 0.7rem;
+        }
+
+        .status.dead {
+            background-color: red;
+        }
+        .status {
+            background-color: yellow;
+        }
+    
+        main {
+            width: 90%;
+            margin: auto;
+        }
+        article {
+            width: 23%;
+            background-color: #28918a;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 200px;
+            margin: 10px 0px;
+        }
+
+        article > img {
+            width: 100%;
+        }
+
+        article div.flex {
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JS Requests</h1>
+    <main class="flex">
+        <article>
+            <img src="cambell.jpg" alt="">
+            <h2>character Name</h2>
+            <div class="flex">
+                <p class="status alive">Alive</p>
+                <p class="gender">Male</p>
+            </div>
+            <p>Location: Agbowo, Ibadan.</p>
+        </article>
+        <article>
+            <img src="cambell.jpg" alt="">
+            <h2>character Name</h2>
+            <div class="flex">
+                <p class="status alive">Alive</p>
+                <p class="gender">Male</p>
+            </div>
+            <p>Location: Agbowo, Ibadan.</p>
+        </article>
+        <article>
+            <img src="cambell.jpg" alt="">
+            <h2>character Name</h2>
+            <div class="flex">
+                <p class="status alive">Alive</p>
+                <p class="gender">Male</p>
+            </div>
+            <p>Location: Agbowo, Ibadan.</p>
+        </article>
+        <article>
+            <img src="cambell.jpg" alt="">
+            <h2>character Name</h2>
+            <div class="flex">
+                <p class="status alive">Alive</p>
+                <p class="gender">Male</p>
+            </div>
+            <p>Location: Agbowo, Ibadan.</p>
+        </article>
+    </main>
+
+    <script>
+        const main = document.querySelector("main");
+        main.innerHTML = null;
+    //     fetch("https://rickandmortyapi.com/api/character/", {method: "GET", })
+    //     .then(function(res) {
+    //         return res.json();
+
+    //     })
+    //     .then(function(response) {
+    //         const characters = response.results;
+    //         for (let i = 0; i < characters.length; i++) {
+    //             const character = characters[i];
+    //             console.log(character);
+
+
+    //         const characterHTML = ` <article>
+    //                 <img src="${character.image}" alt="${character.name}">
+    //                 <h2>${character.name}</h2>
+    //                 <div class="flex">
+    //                     <p class="status ${character.status.toLowerCase()}">${character.status}</p>
+    //                     <p class="gender">${character.gender}</p>
+    //                 </div>
+    //                 <p>Location: ${character.location.name}.</p>
+    //             </article>`;
+    //     console.log(characterHTML);
+    
+    // main.innerHTML += characterHTML;
+                
+    //         }
+        // .catch((err) => {
+        //     console.log("An error occured!!!", err);
+        // )}
+           
+        
+
+        async function generateCharacters() {
+            const res = await fetch("https://rickandmortyapi.com/api/character/", {method: "GET"});
+            const response = await res.json();
+            const characters = response.results;
+            for (let i = 0; i < characters.length; i++) {
+                const character = characters[i];
+                console.log(character);
+
+                const characterHTML = ` <article>
+                    <img src="${character.image}" alt="${character.name}">
+                    <h2>${character.name}</h2>
+                    <div class="flex">
+                        <p class="status ${character.status.toLowerCase()}">${character.status}</p>
+                        <p class="gender">${character.gender}</p>
+                    </div>
+                    <p>Location: ${character.location.name}.</p>
+                </article>`;
+                
+                main.innerHTML += characterHTML;
+            }
+        }
+        generateCharacters();
+    </script>
+    
+</body>
+</html>
